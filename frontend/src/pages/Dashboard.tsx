@@ -4,6 +4,14 @@ import {
   Chip, Dialog, DialogTitle, DialogContent,
   DialogActions, TextField, LinearProgress, Avatar
 } from '@mui/material';
+import {
+  Folder as FolderIcon,
+  Bolt as BoltIcon,
+  Pause as PauseIcon,
+  CheckCircle as CheckCircleIcon,
+  Event as EventIcon,
+  FolderOpen as FolderOpenIcon
+} from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import { useAuth } from '../store/AuthContext';
@@ -56,10 +64,10 @@ export const Dashboard: React.FC = () => {
   };
 
   const stats = [
-    { label: 'Total Projects', value: projects.length, icon: '📁', color: '#6c63ff' },
-    { label: 'Active', value: projects.filter(p => p.status === 'ACTIVE').length, icon: '⚡', color: '#10b981' },
-    { label: 'On Hold', value: projects.filter(p => p.status === 'ON_HOLD').length, icon: '⏸', color: '#f59e0b' },
-    { label: 'Completed', value: projects.filter(p => p.status === 'COMPLETED').length, icon: '✅', color: '#6c63ff' },
+    { label: 'Total Projects', value: projects.length, icon: <FolderIcon fontSize="inherit" />, color: '#6c63ff' },
+    { label: 'Active', value: projects.filter(p => p.status === 'ACTIVE').length, icon: <BoltIcon fontSize="inherit" />, color: '#10b981' },
+    { label: 'On Hold', value: projects.filter(p => p.status === 'ON_HOLD').length, icon: <PauseIcon fontSize="inherit" />, color: '#f59e0b' },
+    { label: 'Completed', value: projects.filter(p => p.status === 'COMPLETED').length, icon: <CheckCircleIcon fontSize="inherit" />, color: '#6c63ff' },
   ];
 
   return (
@@ -92,7 +100,7 @@ export const Dashboard: React.FC = () => {
               flex: '1 1 120px', p: 1, border: '1px solid rgba(255,255,255,0.1)'
             }}>
               <CardContent>
-                <Typography component="div" sx={{ fontSize: '1.8rem' }}>{stat.icon}</Typography>
+                <Typography component="div" sx={{ fontSize: '1.5rem', mb: 1, color: 'text.secondary' }}>{stat.icon}</Typography>
                 <Typography variant="h4" component="div" sx={{ fontWeight: 'bold', color: stat.color }}>{stat.value}</Typography>
                 <Typography variant="caption" component="div" color="text.secondary">{stat.label}</Typography>
               </CardContent>
@@ -136,8 +144,9 @@ export const Dashboard: React.FC = () => {
                   <Typography color="text.secondary" variant="body2" sx={{ mb: 2, minHeight: 40 }}>
                     {proj.description || 'No description provided.'}
                   </Typography>
-                  <Typography variant="caption" color="text.disabled">
-                    📅 Created {new Date(proj.createdAt).toLocaleDateString()}
+                  <Typography variant="caption" color="text.disabled" sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                    <EventIcon sx={{ fontSize: 14 }} />
+                    Created {new Date(proj.createdAt).toLocaleDateString()}
                   </Typography>
                 </CardContent>
                 <CardActions sx={{ p: 2, pt: 0 }}>
@@ -154,12 +163,12 @@ export const Dashboard: React.FC = () => {
             {projects.length === 0 && (
               <Box sx={{
                 width: '100%', textAlign: 'center', py: 8,
-                border: '2px dashed rgba(255,255,255,0.1)', borderRadius: 3
+                border: '2px dashed rgba(255,255,255,0.1)'
               }}>
-                <Typography component="div" sx={{ fontSize: '3rem' }}>📁</Typography>
-                <Typography variant="h6" component="div" color="text.secondary" sx={{ mt: 1 }}>No projects yet</Typography>
+                <FolderOpenIcon sx={{ fontSize: '3rem', color: 'text.disabled', mb: 1 }} />
+                <Typography variant="h6" component="div" color="text.secondary">No projects yet</Typography>
                 <Typography variant="body2" component="div" color="text.disabled">Create your first project to get started!</Typography>
-                <Button variant="contained" onClick={() => setOpen(true)} sx={{ mt: 2 }}>+ New Project</Button>
+                <Button variant="contained" onClick={() => setOpen(true)} sx={{ mt: 2 }}>New Project</Button>
               </Box>
             )}
           </Box>

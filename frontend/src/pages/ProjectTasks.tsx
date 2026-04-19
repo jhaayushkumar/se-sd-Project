@@ -4,6 +4,15 @@ import {
   DialogContent, DialogActions, TextField, Select, MenuItem, FormControl,
   InputLabel, IconButton, Card, CardContent, Divider, Tooltip
 } from '@mui/material';
+import {
+  List as ListIcon,
+  Timeline as TimelineIcon,
+  Search as SearchIcon,
+  CheckCircle as CheckCircleIcon,
+  Delete as DeleteIcon,
+  Event as EventIcon,
+  ArrowBack as ArrowBackIcon
+} from '@mui/icons-material';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../services/api';
 
@@ -16,11 +25,11 @@ interface Task {
   due_date?: string;
 }
 
-const COLUMNS: { key: Task['status']; label: string; color: string; bg: string }[] = [
-  { key: 'TODO', label: '📋 To Do', color: '#94a3b8', bg: 'rgba(148,163,184,0.08)' },
-  { key: 'IN_PROGRESS', label: '⚡ In Progress', color: '#6c63ff', bg: 'rgba(108,99,255,0.08)' },
-  { key: 'REVIEW', label: '🔍 Review', color: '#f59e0b', bg: 'rgba(245,158,11,0.08)' },
-  { key: 'DONE', label: '✅ Done', color: '#10b981', bg: 'rgba(16,185,129,0.08)' },
+const COLUMNS = [
+  { key: 'TODO' as const, label: 'To Do', color: '#94a3b8', icon: <ListIcon fontSize="small" /> },
+  { key: 'IN_PROGRESS' as const, label: 'In Progress', color: '#6c63ff', icon: <TimelineIcon fontSize="small" /> },
+  { key: 'REVIEW' as const, label: 'Review', color: '#f59e0b', icon: <SearchIcon fontSize="small" /> },
+  { key: 'DONE' as const, label: 'Done', color: '#10b981', icon: <CheckCircleIcon fontSize="small" /> },
 ];
 
 const PRIORITY_COLORS: Record<string, string> = {
@@ -93,8 +102,13 @@ export const ProjectTasks: React.FC = () => {
         borderBottom: '1px solid rgba(255,255,255,0.1)'
       }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Button variant="text" onClick={() => navigate('/dashboard')} sx={{ fontWeight: 700 }}>
-            Back
+          <Button
+            variant="text"
+            startIcon={<ArrowBackIcon />}
+            onClick={() => navigate('/dashboard')}
+            sx={{ fontWeight: 700 }}
+          >
+            Dashboard
           </Button>
           <Divider orientation="vertical" flexItem />
           <Typography variant="h6" component="div" sx={{ fontWeight: 800 }}>TASKS</Typography>
@@ -122,7 +136,10 @@ export const ProjectTasks: React.FC = () => {
               }}
             >
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-                <Typography component="div" sx={{ fontWeight: 'bold', color: col.color }}>{col.label}</Typography>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Box sx={{ color: col.color, display: 'flex' }}>{col.icon}</Box>
+                  <Typography component="div" sx={{ fontWeight: 'bold', color: col.color }}>{col.label}</Typography>
+                </Box>
                 <Chip
                   label={tasksByStatus(col.key).length}
                   size="small"
@@ -146,8 +163,8 @@ export const ProjectTasks: React.FC = () => {
                         </Typography>
                         <Tooltip title="Delete Task">
                           <IconButton size="small" onClick={() => handleDelete(task._id)}
-                            sx={{ color: '#ef4444', opacity: 0.6, '&:hover': { opacity: 1 }, p: 0.3 }}>
-                            ✕
+                            sx={{ color: 'text.disabled', '&:hover': { color: '#ef4444' } }}>
+                            <DeleteIcon sx={{ fontSize: 18 }} />
                           </IconButton>
                         </Tooltip>
                       </Box>
@@ -164,8 +181,9 @@ export const ProjectTasks: React.FC = () => {
                           sx={{ fontSize: '0.65rem', fontWeight: 700 }}
                         />
                         {task.due_date && (
-                          <Typography variant="caption" component="span" color="text.secondary">
-                            📅 {new Date(task.due_date).toLocaleDateString()}
+                          <Typography variant="caption" component="span" color="text.secondary" sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                            <EventIcon sx={{ fontSize: 12 }} />
+                            {new Date(task.due_date).toLocaleDateString()}
                           </Typography>
                         )}
                       </Box>
