@@ -6,6 +6,8 @@ import { AuthProvider, useAuth } from './store/AuthContext';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 
+import { Dashboard } from './pages/Dashboard';
+
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated } = useAuth();
   return isAuthenticated ? <>{children}</> : <Navigate to="/login" />;
@@ -21,10 +23,7 @@ const AppRoutes = () => {
         path="/dashboard" 
         element={
           <ProtectedRoute>
-            <div style={{ padding: '2rem' }}>
-              <h1>Dashboard Overview</h1>
-              <p>Project and Task management views will be mounted here.</p>
-            </div>
+            <Dashboard />
           </ProtectedRoute>
         } 
       />
