@@ -90,21 +90,17 @@ export const ProjectTasks: React.FC = () => {
     <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
       <Box sx={{
         p: 2, px: 3, display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        bgcolor: 'background.paper', borderBottom: '1px solid rgba(255,255,255,0.08)',
-        boxShadow: '0 4px 20px rgba(0,0,0,0.2)'
+        borderBottom: '1px solid rgba(255,255,255,0.1)'
       }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Button variant="text" onClick={() => navigate('/dashboard')} sx={{ color: '#6c63ff', fontWeight: 700 }}>
-            ← Dashboard
+          <Button variant="text" onClick={() => navigate('/dashboard')} sx={{ fontWeight: 700 }}>
+            Back
           </Button>
           <Divider orientation="vertical" flexItem />
-          <Typography variant="h6" component="div" sx={{ fontWeight: 'bold' }}>Task Board</Typography>
+          <Typography variant="h6" component="div" sx={{ fontWeight: 800 }}>TASKS</Typography>
         </Box>
-        <Button variant="contained" onClick={() => setOpen(true)} sx={{
-          background: 'linear-gradient(135deg, #6c63ff, #ff6584)',
-          fontWeight: 700, px: 3
-        }}>
-          + New Task
+        <Button variant="contained" onClick={() => setOpen(true)} sx={{ fontWeight: 700, px: 3 }}>
+          New Task
         </Button>
       </Box>
 
@@ -120,10 +116,9 @@ export const ProjectTasks: React.FC = () => {
               onDragOver={e => e.preventDefault()}
               onDrop={() => onDrop(col.key)}
               sx={{
-                minWidth: 280, flex: 1, bgcolor: col.bg,
-                border: `1px solid ${col.color}30`,
-                borderRadius: 3, p: 2,
-                transition: 'all 0.2s',
+                minWidth: 280, flex: 1,
+                border: '1px solid rgba(255,255,255,0.1)',
+                p: 2
               }}
             >
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
@@ -141,15 +136,12 @@ export const ProjectTasks: React.FC = () => {
                     draggable
                     onDragStart={() => onDragStart(task._id)}
                     sx={{
-                      cursor: 'grab', transition: 'all 0.2s',
-                      border: '1px solid rgba(255,255,255,0.06)',
-                      '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 8px 24px rgba(0,0,0,0.3)' },
-                      '&:active': { cursor: 'grabbing' }
+                      border: '1px solid rgba(255,255,255,0.1)'
                     }}
                   >
                     <CardContent sx={{ p: 2, '&:last-child': { pb: 2 } }}>
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1 }}>
-                        <Typography variant="body1" component="div" sx={{ fontWeight: 600, flex: 1, pr: 1 }}>
+                        <Typography variant="body2" component="div" sx={{ fontWeight: 700, flex: 1, pr: 1 }}>
                           {task.title}
                         </Typography>
                         <Tooltip title="Delete Task">
@@ -168,11 +160,8 @@ export const ProjectTasks: React.FC = () => {
                         <Chip
                           label={task.priority}
                           size="small"
-                          sx={{
-                            bgcolor: `${PRIORITY_COLORS[task.priority]}20`,
-                            color: PRIORITY_COLORS[task.priority],
-                            fontWeight: 700, fontSize: '0.65rem'
-                          }}
+                          variant="outlined"
+                          sx={{ fontSize: '0.65rem', fontWeight: 700 }}
                         />
                         {task.due_date && (
                           <Typography variant="caption" component="span" color="text.secondary">
@@ -184,15 +173,10 @@ export const ProjectTasks: React.FC = () => {
                         {COLUMNS.filter(c => c.key !== task.status).map(c => (
                           <Chip
                             key={c.key}
-                            label={`→ ${c.key.replace('_', ' ')}`}
+                            label={c.key}
                             size="small"
-                            clickable
                             onClick={() => handleStatusChange(task._id, c.key)}
-                            sx={{
-                              fontSize: '0.6rem', height: 20,
-                              bgcolor: 'rgba(255,255,255,0.05)',
-                              '&:hover': { bgcolor: `${c.color}25` }
-                            }}
+                            sx={{ fontSize: '0.6rem', height: 20 }}
                           />
                         ))}
                       </Box>
@@ -251,7 +235,7 @@ export const ProjectTasks: React.FC = () => {
           <Button onClick={() => setOpen(false)}>Cancel</Button>
           <Button
             onClick={handleCreate} variant="contained" disabled={!newTask.title}
-            sx={{ background: 'linear-gradient(135deg, #6c63ff, #ff6584)' }}
+            sx={{ fontWeight: 700 }}
           >
             Create Task
           </Button>

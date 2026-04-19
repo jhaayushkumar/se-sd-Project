@@ -25,21 +25,22 @@ export const Register: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ display: 'flex', minHeight: '100vh', alignItems: 'center' }}>
-      <Paper elevation={3} sx={{ p: 4, width: '100%', display: 'flex', flexDirection: 'column', gap: 2 }}>
-        <Typography variant="h4" component="h1" sx={{ fontWeight: 'bold', textAlign: 'center' }} color="primary">Create Account</Typography>
-        {error && <Typography color="error" component="div" sx={{ textAlign: 'center' }}>{error}</Typography>}
+    <Container maxWidth="xs" sx={{ display: 'flex', minHeight: '100vh', alignItems: 'center' }}>
+      <Paper sx={{ p: 4, width: '100%', border: '1px solid rgba(255,255,255,0.1)' }}>
+        <Typography variant="h5" component="h1" sx={{ fontWeight: 700, mb: 3 }}>Register</Typography>
+        {error && <Typography color="error" component="div" sx={{ mb: 2, fontSize: '0.875rem' }}>{error}</Typography>}
         <Box component="form" onSubmit={handleRegister} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-          <TextField label="First Name" variant="outlined" fullWidth value={first_name} onChange={e => setFirstName(e.target.value)} required />
-          <TextField label="Last Name" variant="outlined" fullWidth value={last_name} onChange={e => setLastName(e.target.value)} required />
-          <TextField label="Email" type="email" variant="outlined" fullWidth value={email} onChange={e => setEmail(e.target.value)} required />
-          <TextField label="Password" type="password" variant="outlined" fullWidth value={password} onChange={e => setPassword(e.target.value)} required />
-          <Button type="submit" variant="contained" color="primary" size="large" fullWidth>Sign Up</Button>
+          <TextField label="First Name" variant="outlined" fullWidth value={first_name} onChange={e => setFirstName(e.target.value)} required size="small" />
+          <TextField label="Last Name" variant="outlined" fullWidth value={last_name} onChange={e => setLastName(e.target.value)} required size="small" />
+          <TextField label="Email" type="email" variant="outlined" fullWidth value={email} onChange={e => setEmail(e.target.value)} required size="small" />
+          <TextField label="Password" type="password" variant="outlined" fullWidth value={password} onChange={e => setPassword(e.target.value)} required size="small" />
+          <Button type="submit" variant="contained" fullWidth sx={{ mt: 1 }}>Sign Up</Button>
         </Box>
-        <Typography component="div" sx={{ textAlign: 'center', mt: 2 }}>
-          Already have an account? <Link to="/login" style={{ color: '#6c63ff', textDecoration: 'none' }}>Login instead</Link>
+        <Typography component="div" sx={{ mt: 3, fontSize: '0.875rem', opacity: 0.7 }}>
+          Have an account? <Link to="/login" style={{ color: '#94a3b8', textDecoration: 'underline' }}>Login</Link>
         </Typography>
       </Paper>
     </Container>
   );
+
 };

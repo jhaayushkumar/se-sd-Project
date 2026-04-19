@@ -66,15 +66,10 @@ export const Dashboard: React.FC = () => {
     <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
       <Box sx={{
         p: 2, px: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        bgcolor: 'background.paper', borderBottom: '1px solid rgba(255,255,255,0.08)',
-        boxShadow: '0 4px 20px rgba(0,0,0,0.2)'
+        borderBottom: '1px solid rgba(255,255,255,0.1)'
       }}>
-        <Typography variant="h6" component="div" sx={{
-          fontWeight: 'bold',
-          background: 'linear-gradient(135deg, #6c63ff, #ff6584)',
-          backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
-        }}>
-          ⚡ Workspace
+        <Typography variant="h6" component="div" sx={{ fontWeight: 800 }}>
+          WORKSPACE
         </Typography>
         <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
           <Avatar sx={{ bgcolor: '#6c63ff', width: 32, height: 32, fontSize: 14 }}>
@@ -94,11 +89,7 @@ export const Dashboard: React.FC = () => {
         <Box sx={{ display: 'flex', gap: 2, mb: 4, flexWrap: 'wrap' }}>
           {stats.map((stat) => (
             <Card key={stat.label} sx={{
-              flex: '1 1 150px', textAlign: 'center', p: 1,
-              background: `linear-gradient(135deg, ${stat.color}15, ${stat.color}05)`,
-              border: `1px solid ${stat.color}30`,
-              transition: 'transform 0.2s',
-              '&:hover': { transform: 'translateY(-4px)' }
+              flex: '1 1 120px', p: 1, border: '1px solid rgba(255,255,255,0.1)'
             }}>
               <CardContent>
                 <Typography component="div" sx={{ fontSize: '1.8rem' }}>{stat.icon}</Typography>
@@ -110,15 +101,12 @@ export const Dashboard: React.FC = () => {
         </Box>
 
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-          <Typography variant="h4" component="h1" sx={{ fontWeight: 'bold' }}>My Projects</Typography>
+          <Typography variant="h4" component="h1" sx={{ fontWeight: 800 }}>Projects</Typography>
           <Button
             variant="contained" onClick={() => setOpen(true)}
-            sx={{
-              background: 'linear-gradient(135deg, #6c63ff, #ff6584)',
-              fontWeight: 700, px: 3, borderRadius: 2
-            }}
+            sx={{ fontWeight: 700, px: 3 }}
           >
-            + New Project
+            New Project
           </Button>
         </Box>
 
@@ -130,14 +118,7 @@ export const Dashboard: React.FC = () => {
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
             {projects.map((proj) => (
               <Card key={proj._id} sx={{
-                flex: '1 1 280px', maxWidth: 380, display: 'flex', flexDirection: 'column',
-                transition: 'all 0.25s',
-                border: '1px solid rgba(255,255,255,0.06)',
-                '&:hover': {
-                  transform: 'translateY(-6px)',
-                  boxShadow: '0 20px 40px rgba(108,99,255,0.2)',
-                  border: '1px solid rgba(108,99,255,0.3)'
-                }
+                flex: '1 1 280px', border: '1px solid rgba(255,255,255,0.1)'
               }}>
                 <CardContent sx={{ flexGrow: 1 }}>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1.5 }}>
@@ -161,15 +142,11 @@ export const Dashboard: React.FC = () => {
                 </CardContent>
                 <CardActions sx={{ p: 2, pt: 0 }}>
                   <Button
-                    size="small" variant="contained" fullWidth
+                    size="small" variant="outlined" fullWidth
                     onClick={() => navigate(`/projects/${proj._id}/tasks`)}
-                    sx={{
-                      background: 'linear-gradient(135deg, #6c63ff44, #ff658444)',
-                      color: '#fff', fontWeight: 700,
-                      '&:hover': { background: 'linear-gradient(135deg, #6c63ff, #ff6584)' }
-                    }}
+                    sx={{ fontWeight: 700 }}
                   >
-                    📋 Manage Tasks
+                    View Tasks
                   </Button>
                 </CardActions>
               </Card>
@@ -207,7 +184,7 @@ export const Dashboard: React.FC = () => {
           <Button onClick={() => setOpen(false)}>Cancel</Button>
           <Button
             onClick={handleCreateProject} variant="contained" disabled={!newProject.name}
-            sx={{ background: 'linear-gradient(135deg, #6c63ff, #ff6584)', fontWeight: 700 }}
+            sx={{ fontWeight: 700 }}
           >
             Create
           </Button>
