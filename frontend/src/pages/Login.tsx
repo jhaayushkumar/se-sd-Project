@@ -25,8 +25,8 @@ export const Login: React.FC = () => {
   return (
     <Container maxWidth="sm" sx={{ display: 'flex', minHeight: '100vh', alignItems: 'center' }}>
       <Paper elevation={3} sx={{ p: 4, width: '100%', display: 'flex', flexDirection: 'column', gap: 2 }}>
-        <Typography variant="h4" fontWeight="bold" textAlign="center" color="primary">Welcome Back</Typography>
-        {error && <Typography color="error" textAlign="center">{error}</Typography>}
+        <Typography variant="h4" fontWeight="bold" align="center" color="primary">Welcome Back</Typography>
+        {error && <Typography color="error" align="center">{error}</Typography>}
         <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <TextField label="Email" variant="outlined" fullWidth value={email} onChange={e => setEmail(e.target.value)} required />
           <TextField label="Password" type="password" variant="outlined" fullWidth value={password} onChange={e => setPassword(e.target.value)} required />
