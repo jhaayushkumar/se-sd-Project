@@ -5,8 +5,8 @@ import { theme } from './theme';
 import { AuthProvider, useAuth } from './store/AuthContext';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
-
 import { Dashboard } from './pages/Dashboard';
+import { ProjectTasks } from './pages/ProjectTasks';
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated } = useAuth();
@@ -19,13 +19,21 @@ const AppRoutes = () => {
       <Route path="/" element={<Navigate to="/dashboard" />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route 
-        path="/dashboard" 
+      <Route
+        path="/dashboard"
         element={
           <ProtectedRoute>
             <Dashboard />
           </ProtectedRoute>
-        } 
+        }
+      />
+      <Route
+        path="/projects/:id/tasks"
+        element={
+          <ProtectedRoute>
+            <ProjectTasks />
+          </ProtectedRoute>
+        }
       />
     </Routes>
   );

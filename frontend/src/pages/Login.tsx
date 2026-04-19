@@ -32,7 +32,7 @@ export const Login: React.FC = () => {
           <TextField label="Password" type="password" variant="outlined" fullWidth value={password} onChange={e => setPassword(e.target.value)} required />
           <Button type="submit" variant="contained" color="primary" size="large" fullWidth>Login</Button>
         </form>
-        <Typography textAlign="center" sx={{ mt: 2 }}>
+        <Typography align="center" sx={{ mt: 2 }}>
           Don't have an account? <Link to="/register" style={{ color: '#6c63ff', textDecoration: 'none' }}>Register here</Link>
         </Typography>
       </Paper>
