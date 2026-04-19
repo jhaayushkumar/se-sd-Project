@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   Box, Typography, Button, Chip, CircularProgress, Dialog, DialogTitle,
   DialogContent, DialogActions, TextField, Select, MenuItem, FormControl,
-  InputLabel, IconButton, Card, CardContent, Divider, Avatar, Tooltip
+  InputLabel, IconButton, Card, CardContent, Divider, Tooltip
 } from '@mui/material';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../services/api';
@@ -98,7 +98,7 @@ export const ProjectTasks: React.FC = () => {
             ← Dashboard
           </Button>
           <Divider orientation="vertical" flexItem />
-          <Typography variant="h6" fontWeight="bold">Task Board</Typography>
+          <Typography variant="h6" component="div" sx={{ fontWeight: 'bold' }}>Task Board</Typography>
         </Box>
         <Button variant="contained" onClick={() => setOpen(true)} sx={{
           background: 'linear-gradient(135deg, #6c63ff, #ff6584)',
@@ -127,7 +127,7 @@ export const ProjectTasks: React.FC = () => {
               }}
             >
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-                <Typography fontWeight="bold" sx={{ color: col.color }}>{col.label}</Typography>
+                <Typography component="div" sx={{ fontWeight: 'bold', color: col.color }}>{col.label}</Typography>
                 <Chip
                   label={tasksByStatus(col.key).length}
                   size="small"
@@ -149,7 +149,7 @@ export const ProjectTasks: React.FC = () => {
                   >
                     <CardContent sx={{ p: 2, '&:last-child': { pb: 2 } }}>
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1 }}>
-                        <Typography variant="body1" fontWeight="600" sx={{ flex: 1, pr: 1 }}>
+                        <Typography variant="body1" component="div" sx={{ fontWeight: 600, flex: 1, pr: 1 }}>
                           {task.title}
                         </Typography>
                         <Tooltip title="Delete Task">
@@ -160,9 +160,9 @@ export const ProjectTasks: React.FC = () => {
                         </Tooltip>
                       </Box>
                       {task.description && (
-                        <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 1 }}>
-                          {task.description}
-                        </Typography>
+                          <Typography variant="caption" component="div" color="text.secondary" sx={{ display: 'block', mb: 1 }}>
+                            {task.description}
+                          </Typography>
                       )}
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 1.5 }}>
                         <Chip
@@ -175,7 +175,7 @@ export const ProjectTasks: React.FC = () => {
                           }}
                         />
                         {task.due_date && (
-                          <Typography variant="caption" color="text.secondary">
+                          <Typography variant="caption" component="span" color="text.secondary">
                             📅 {new Date(task.due_date).toLocaleDateString()}
                           </Typography>
                         )}
@@ -204,7 +204,7 @@ export const ProjectTasks: React.FC = () => {
                     border: '2px dashed rgba(255,255,255,0.08)', borderRadius: 2,
                     p: 3, textAlign: 'center', color: 'text.disabled'
                   }}>
-                    <Typography variant="caption">Drop tasks here</Typography>
+                    <Typography variant="caption" component="div">Drop tasks here</Typography>
                   </Box>
                 )}
               </Box>
@@ -213,9 +213,9 @@ export const ProjectTasks: React.FC = () => {
         </Box>
       )}
 
-      <Dialog open={open} onClose={() => setOpen(false)} PaperProps={{ sx: { minWidth: 400 } }}>
+      <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle sx={{ fontWeight: 700 }}>Create New Task</DialogTitle>
-        <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 1 }}>
+        <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 1, minWidth: 400 }}>
           <TextField
             label="Task Title" fullWidth
             value={newTask.title}
@@ -242,7 +242,7 @@ export const ProjectTasks: React.FC = () => {
           </FormControl>
           <TextField
             label="Due Date" type="date" fullWidth
-            InputLabelProps={{ shrink: true }}
+            slotProps={{ inputLabel: { shrink: true } }}
             value={newTask.due_date}
             onChange={e => setNewTask({ ...newTask, due_date: e.target.value })}
           />
