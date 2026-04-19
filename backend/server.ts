@@ -4,6 +4,8 @@ import helmet from 'helmet';
 import mongoose from 'mongoose';
 import { config } from './config';
 import authRoutes from './routes/auth.routes';
+import projectRoutes from './routes/project.routes';
+import taskRoutes from './routes/task.routes';
 
 const app = express();
 
@@ -13,6 +15,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/auth', authRoutes);
+app.use('/api/projects', projectRoutes);
+app.use('/api/tasks', taskRoutes);
 
 app.get('/health', (req: Request, res: Response) => {
   res.status(200).json({ status: 'UP' });
